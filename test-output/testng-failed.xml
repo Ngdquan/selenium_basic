@@ -5,8 +5,7 @@
     <classes>
       <class name="test.testDemo">
         <methods>
-          <include name="tearDown"/>
-          <include name="loginTestFail2"/>
+          <include name="loginErrorMsgPassword"/>
           <include name="setUp"/>
         </methods>
       </class> <!-- test.testDemo -->

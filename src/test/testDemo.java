@@ -33,23 +33,48 @@ public class testDemo {
 	@Test
 	public void loginTestPass() {
 		login("QuanThang", "Duyquan3112");
-		Assert.assertEquals(driver.getCurrentUrl(), URL_dashBoard);
+		Assert.assertEquals(driver.getCurrentUrl(), "http://localhost/wordpress/wp-admin/");
 	}
 
 	@Test
 	public void loginTestFail1() {
-		login("", "");
-		Assert.assertEquals(driver.getCurrentUrl(), URL_login);
+		login("aaaaa", "Duyquan3112");
+		Assert.assertNotEquals(driver.getCurrentUrl(), URL_dashBoard);
 	}
 	
 	@Test
 	public void loginTestFail2() {
 		login("", "");
-		Assert.assertEquals(driver.getCurrentUrl(), URL_dashBoard);
+		Assert.assertNotEquals(driver.getCurrentUrl(), URL_dashBoard);
+	}
+	
+	@Test
+	public void loginTestFail3() {
+		login("QuanThang", "12345678");
+		Assert.assertNotEquals(driver.getCurrentUrl(), URL_dashBoard);
+	}
+	
+	@Test
+	public void loginErrorMsg() {
+		login("", "");
+		Assert.assertEquals(driver.findElement(By.id("login_error")).getText(), "Error: The username field is empty."
+			+"\n"	+ "Error: The password field is empty.");
+	}
+	
+	@Test
+	public void loginErrorMsgUsername() {
+		login("aaaa", "12345678");
+		Assert.assertEquals(driver.findElement(By.id("login_error")).getText(), "Error: The username aaaa is not registered on this site. If you are unsure of your username, try your email address instead.");
+	}
+	
+	@Test
+	public void loginErrorMsgPassword() {
+		login("QuanThang", "12345678");
+		Assert.assertEquals(driver.findElement(By.id("login_error")).getText(), "Error: The password you entered for the username QuanThang is incorrect. Bạn quên mật khẩu?");
 	}
 
-	@AfterMethod
-	public void tearDown() {
-		driver.quit();
-	}
+//	@AfterMethod
+//	public void tearDown() {
+//		driver.quit();
+//	}
 }
