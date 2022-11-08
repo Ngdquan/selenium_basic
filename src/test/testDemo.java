@@ -33,7 +33,7 @@ public class testDemo {
 	@Test
 	public void loginTestPass() {
 		login("QuanThang", "Duyquan3112");
-		Assert.assertEquals(driver.getCurrentUrl(), "http://localhost/wordpress/wp-admin/");
+		Assert.assertEquals(driver.getCurrentUrl(), URL_dashBoard);
 	}
 
 	@Test
